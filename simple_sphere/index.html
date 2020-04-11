@@ -1,79 +1,86 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>version 01 sphere</title>
-
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet');
-
-      #figure {
-        right: 0;
-        float: left;
-        margin: 10px 10px;
-        background: transparent;
-        font-family: 'Ubuntu', sans-serif;
-        position: fixed;
-        top: 100px;
-        right: 100px;
-        margin: 0 10px 10px 0;
-        z-index: 1000;
-      }
-    </style>
-
+    <meta charset="utf-8">
+    <title>sphere 01</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    
-    <!-- we import arjs version without NFT but with marker + location based support 
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-
-    shape key modifyer
-    <script src="https://rawcdn.githack.com/elbobo/aframe-gltf-morph-component/07e9b80bd382cc1c19223468d35c453e7c76e9a2/dist/aframe-gltf-morph-component.js"></script>-->
-    <!--to animate gltf files see also: https://aframe.io/docs/1.0.0/components/gltf-model.html
-    <script src="https://raw.githubusercontent.com/donmccurdy/aframe-extras/master/src/loaders/animation-mixer.js" ></script>-->
-
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-
-    <!--for older versions of gltf files
-    <script src="https://github.com/donmccurdy/aframe-extras/blob/master/src/loaders/gltf-model-legacy.js"></script>-->
-
   </head>
-  <body style="margin : 0px; overflow: hidden;">
-    <a-scene>
-      	<a-assets>
-      	  <img id="l01" src="assets/01_layer.png">
-      	  <img id="l02" src="assets/02_layer.png">
-      	  <img id="l03" src="assets/03_layer.png">
-      	</a-assets>
+  <body>
+    <a-scene background="color: #FAFAFA">
 
-          <a-sphere
-            id="sphere_01"
-            material="src: #l01; side: double; transparent: true"
-            scale='0.1 0.1 0.1'
-            segments-height="128"
-            segments-width="128"
-            position="0 0 0.5"
-            animation__rotation="startEvent: eventTest; property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
-          ></a-sphere>
-      	  <a-sphere
-      	  	id="sphere_02"
-      	    material="src: #l01; side: double; transparent: true"
-      	    scale='0.09 0.09 0.09'
-      	    segments-height="128"
-      	    segments-width="128"
-      	    position="0 0 0.5"
-
-      	  ></a-sphere>
-
-      <a-entity camera></a-entity>
+      <a-assets>
+        <img id="l01" src="assets/deathSphere.png">
+    </a-assets>
+      <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
+      <a-sphere
+      id="sphere_01"
+      material="src: #l01; side: double; transparent: true; depthTest: false"
+      segments-height="128"
+      segments-width="128"
+      position="0 2.25 -5" 
+      radius="1.25" 
+      animation__rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+      animation__op="property: opacity; dur: 8000; easing: linear; from:0; to: 1; dir: alternate; loop: true"
+      animation__sc="property: scale; easing: linear; from: 2 2 2; to: 2 2 2; dir: alternate; loop: true;"
+      ></a-sphere>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
     </a-scene>
 
-    <div id="figure"></div>
+    <script> 
 
-    <!-- webscrape corona -->
-    <script src="js/scrape.js"></script>
+      // corona statistic
+      const confirmed_t1 = 660706;
+      const confirmed_t0 = 593291;
+      const confirmed = (confirmed_t1 - confirmed_t0)/confirmed_t0;
+      // t1 > t0 11.36288937469134
+      // t1 < t0 -0.28778657104530875
+
+      const deaths_t1 = 30652;
+      const deaths_t0 = 27198;
+      const deaths = (deaths_t1 - deaths_t0)/deaths_t0;
+
+      const recovered_t1 = 139415;
+      const recovered_t0 = 130915;
+      const recovered = (recovered_t1 - recovered_t0)/recovered_t0;
+
+      console.log("C " + confirmed,"D " + deaths, "R " +recovered);
+
+      const scene = document.querySelector('a-scene');
+      const run = () => {
+
+
+        const sphere = document.querySelector("#sphere_01");
+        const anim_rot = sphere.getAttribute("animation__rot");
+        const anim_sc = sphere.getAttribute("animation__sc");
+        const anim_op = sphere.getAttribute("animation__op");
+        
+        if (deaths > recovered){
+        
+          anim_rot.dur = 1200;
+          anim_sc.to = "4 4 4";
+          anim_op.from = 1;
+          anim_op.to = 0;
+          anim_op.dur = 1600;
+        } else {
+
+        }
+        console.log(anim_sc)
+
+
+        sphere.setAttribute("animation__rot", anim_rot);
+        sphere.setAttribute("animation__op", anim_op);
+        sphere.setAttribute("animation__sc", anim_sc);
+        console.log("hello", anim_rot);
+      }
+      if (scene.hasLoaded) {
+        run()
+      } else {
+        scene.addEventListener('loaded', run)
+      }
+
+    </script>
+
   </body>
 </html>
-
-
-
