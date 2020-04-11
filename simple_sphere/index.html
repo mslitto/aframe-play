@@ -23,9 +23,11 @@
     </style>
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!-- we import arjs version without NFT but with marker + location based support -->
+    
+    <!-- we import arjs version without NFT but with marker + location based support 
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <!-- shape key modifyer
+
+    shape key modifyer
     <script src="https://rawcdn.githack.com/elbobo/aframe-gltf-morph-component/07e9b80bd382cc1c19223468d35c453e7c76e9a2/dist/aframe-gltf-morph-component.js"></script>-->
     <!--to animate gltf files see also: https://aframe.io/docs/1.0.0/components/gltf-model.html
     <script src="https://raw.githubusercontent.com/donmccurdy/aframe-extras/master/src/loaders/animation-mixer.js" ></script>-->
@@ -37,7 +39,7 @@
 
   </head>
     <body style="margin : 0px; overflow: hidden;">
-      <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" vr-mode-ui="enabled: true"renderer='precision: medium;'>
+      <a-scene>
 	<a-assets>
 	  <img id="l01" src="assets/01_layer.png">
 	  <img id="l02" src="assets/02_layer.png">
