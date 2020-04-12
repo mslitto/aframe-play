@@ -6,25 +6,72 @@
     <meta name="description" content="Hello, WebVR! • A-Frame">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-render-order-component@1.1.0/dist/aframe-render-order-component.min.js"></script>
   </head>
   <body>
-    <a-scene background="color: #FAFAFA">
+    <a-scene background="color: #212122" render-order="render1, render2, render3">
 
       <a-assets>
-        <img id="l01" src="assets/deathSphere.png">
-    </a-assets>
-      <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
-      <a-sphere
-      id="sphere_01"
-      material="src: #l01; side: double; transparent: true; depthTest: false"
-      segments-height="128"
-      segments-width="128"
-      position="0 2.25 -5" 
-      radius="1.25" 
-      animation__rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
-      animation__op="property: opacity; dur: 8000; easing: linear; from:0; to: 1; dir: alternate; loop: true"
-      animation__sc="property: scale; easing: linear; from: 2 2 2; to: 2 2 2; dir: alternate; loop: true;"
-      ></a-sphere>
+        <img id="l00" src="assets/layers/layers00.png">
+        <img id="l01" src="assets/layers/layers01.png">
+        <img id="l02" src="assets/layers/layers02.png">
+        <img id="l03" src="assets/layers/layers03.png">
+        <img id="l04" src="assets/layers/layers04.png">
+        <img id="l05" src="assets/layers/layers05.png">
+        <img id="l06" src="assets/layers/layers06.png">
+        <img id="l07" src="assets/layers/layers07.png">
+        <img id="l08" src="assets/layers/layers08.png">
+        <img id="l09" src="assets/layers/layers09.png">
+        <img id="l10" src="assets/layers/layers10.png">
+        <img id="l11" src="assets/layers/layers11.png">
+        
+        <a-asset-item id="01_quill" response-type="arraybuffer" src="assets/blub2.gltf"></a-asset-item>
+        </a-assets>
+
+      
+        <a-entity geometry="primitive: sphere"
+        id="L1"
+        render-order="render3"
+        material="src: #l10; side: double; transparent: true;"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.55" 
+        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 0; dir: alternate; loop: true;"
+        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 2 2 2; dir: alternate; loop: true;"
+        animation__1dis="property: material.displacementScale; dir: alternate; from: 1; to: 12; dur: 8000; loop: true;"
+        ></a-entity>
+        
+        <a-entity geometry="primitive: sphere"
+        id="L2"
+        render-order="render2"
+        material="src: #l04; side: double; transparent: true; depthTest: false; alphaTest: true"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.25" 
+        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
+        ></a-entity>
+
+        <a-entity geometry="primitive: sphere"
+        id="L3"
+        render-order="render1"
+        material="src: #l05; side: double; transparent: true; depthTest: false; alphaTest: true"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.05" 
+        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
+        ></a-entity>
+          
+
+
+
+
+
+  
+
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
     </a-scene>
 
@@ -48,32 +95,51 @@
       console.log("C " + confirmed,"D " + deaths, "R " +recovered);
 
       const scene = document.querySelector('a-scene');
+      
       const run = () => {
 
+      //L1 
+        const sphere = document.querySelector("#L1");
+        const anim_1op = sphere.getAttribute("animation__1op");
+        const anim_1sc = sphere.getAttribute("animation__1sc");
+        const anim_1dis = sphere.getAttribute("animation__1dis");
+        const anim_1rot = sphere.getAttribute("animation__1rot");
+      
+/*      //L2
+        const sphere = document.querySelector("#L2");
+        const anim_1op = sphere.getAttribute("animation__2op");
+        const anim_1sc = sphere.getAttribute("animation__2sc");
+        const anim_1dis = sphere.getAttribute("animation__2dis");
+        const anim_1rot = sphere.getAttribute("animation__2rot");
 
-        const sphere = document.querySelector("#sphere_01");
-        const anim_rot = sphere.getAttribute("animation__rot");
-        const anim_sc = sphere.getAttribute("animation__sc");
-        const anim_op = sphere.getAttribute("animation__op");
+        //L3
+        const sphere = document.querySelector("#L3");
+        const anim_1op = sphere.getAttribute("animation__3op");
+        const anim_1sc = sphere.getAttribute("animation__3sc");
+        const anim_1dis = sphere.getAttribute("animation__3dis");
+        const anim_1rot = sphere.getAttribute("animation__3rot");*/
+
+      // D^ > R^
+        if (confirmed > 0.1 && confirmed < 0.3){
+          //L1
+          anim_1rot.dur = 1000;
+          anim_1sc.to = "0.5 0.5 0.5";
+          anim_1sc.dur = 6000; 
+          anim_1op.dur = 6000;
+          anim_1op.from = 1;
+          anim_1op.to = 0;
+          anim_1op.delay = 3000;
+          anim_1sc.delay = 3000;
+        } 
+
+        sphere.setAttribute("animation__1op", anim_1op);
+        sphere.setAttribute("animation__1sc", anim_1sc);
+        sphere.setAttribute("animation__1dis", anim_1dis);
+        sphere.setAttribute("animation__1rot", anim_1rot);
         
-        if (deaths > recovered){
-        
-          anim_rot.dur = 1200;
-          anim_sc.to = "4 4 4";
-          anim_op.from = 1;
-          anim_op.to = 0;
-          anim_op.dur = 1600;
-        } else {
-
-        }
-        console.log(anim_sc)
-
-
-        sphere.setAttribute("animation__rot", anim_rot);
-        sphere.setAttribute("animation__op", anim_op);
-        sphere.setAttribute("animation__sc", anim_sc);
-        console.log("hello", anim_rot);
+        console.log("hello", confirmed);
       }
+
       if (scene.hasLoaded) {
         run()
       } else {
