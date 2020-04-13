@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/aframe-render-order-component@1.1.0/dist/aframe-render-order-component.min.js"></script>
   </head>
   <body>
-    <a-scene background="color: #212122" render-order="render1, render2, render3">
+    <a-scene background="color: #212122" renderer="sortObjects: true;">
 
       <a-assets>
         <img id="l00" src="assets/layers/layers00.png">
@@ -31,8 +31,7 @@
       
         <a-entity geometry="primitive: sphere"
         id="L1"
-        render-order="render3"
-        material="src: #l10; side: double; transparent: true;"
+        material="src: #l10; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
@@ -45,8 +44,7 @@
         
         <a-entity geometry="primitive: sphere"
         id="L2"
-        render-order="render2"
-        material="src: #l04; side: double; transparent: true; depthTest: false; alphaTest: true"
+        material="src: #l04; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
@@ -56,8 +54,7 @@
 
         <a-entity geometry="primitive: sphere"
         id="L3"
-        render-order="render1"
-        material="src: #l05; side: double; transparent: true; depthTest: false; alphaTest: true"
+        material="src: #l05; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
