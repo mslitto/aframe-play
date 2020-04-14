@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>sphere 01</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://google-ar.github.io/three.ar.js/dist/three.ar.js"></script>
+    <script src="https://rawgit.com/chenzlabs/aframe-ar/827e9db/dist/aframe-ar.min.js"></script>
+
+
+    <script>
+      // array of images?
+    </script>
+
+  </head>
+  <body style="margin : 0px; overflow: hidden;">
+    <a-scene ar arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" vr-mode-ui="enabled: false"renderer='precision: medium;'>
+      <a-camera ar-raycaster raycaster cursor="fuse:false"> </a-camera>
+      <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
+        color="teal" position="0 -0.8 -5" rotation="-90 0 0">
+      </a-ring>
+      <a-assets>
+        <img id="l00" src="assets/layers/layers00.png">
+        <img id="l01" src="assets/04/frame_00000.png">
+        <img id="l02" src="assets/layers/layers02.png">
+        <img id="l03" src="assets/layers/layers03.png">
+        <img id="l04" src="assets/layers/layers04.png">
+        <img id="l05" src="assets/layers/layers05.png">
+        <img id="l06" src="assets/layers/layers06.png">
+        <img id="l07" src="assets/layers/layers07.png">
+        <img id="l08" src="assets/layers/layers08.png">
+        <img id="l09" src="assets/layers/layers09.png">
+        <img id="l10" src="assets/layers/layers10.png">
+        <img id="l11" src="assets/layers/layers11.png">
+        </a-assets>
+
+        <!-- Red directional light shining from the top left. -->
+        <a-entity light="type:directional; castShadow:true;" position="1 10 1"></a-entity>
+
+        <a-entity light="type: spot; angle: 70"></a-entity>
+        <a-entity light="type: point; intensity: 2.55; distance: 1; decay: 2"position="0 2.25 -5"></a-entity>
+      
+        <a-sphere
+        id="L1"
+        material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.55" 
+        displacement-map="#l01"
+        displacement-bias="0"
+        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
+        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
+        animation__1dis="property: material.displacementScale; dir: alternate; from: 0; to: 1; dur: 3000; loop: true;"
+        animate-png
+        ></a-sphere>
+        
+        <a-sphere
+        id="L2"
+        material="src: #l05; side: double; transparent: true; alphaTest: 0.5"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.5" 
+        animation__2rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
+        animation__1sc="property: scale; easing: easeInOutQuad; from: 0.5 0.5 0.5; to: 2 2 2; dir: alternate; loop: true;"
+        ></a-sphere>
+
+        <a-sphere
+        id="L3"
+        material="src: #l07; side: double; transparent: true; alphaTest: 0.5"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.5" 
+        animation__3rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
+        ></a-sphere>
+          
+    </a-scene>
+
+    <script> 
+
+      // corona statistic
+      const confirmed_t1 = 660706;
+      const confirmed_t0 = 593291;
+      const confirmed = (confirmed_t1 - confirmed_t0)/confirmed_t0;
+      // t1 > t0 11.36288937469134
+      // t1 < t0 -0.28778657104530875
+
+      const deaths_t1 = 30652;
+      const deaths_t0 = 27198;
+      const deaths = (deaths_t1 - deaths_t0)/deaths_t0;
+
+      const recovered_t1 = 139415;
+      const recovered_t0 = 130915;
+      const recovered = (recovered_t1 - recovered_t0)/recovered_t0;
+
+      console.log("C " + confirmed,"D " + deaths, "R " +recovered);
+
+      //load Space for object
+      const onSceneLoaded = () => {
+        const raycaster = document.querySelector('[ar-raycaster]');
+        const cursor = document.querySelector('#cursor');
+        raycaster.addEventListener('raycaster-intersection', (event) => {
+          cursor.setAttribute('position', event.detail.intersections[0].point);
+        });
+      }
+
+      const scene = document.querySelector('a-scene');
+      scene.addEventListener('loaded', onSceneLoaded);
+
+      //png Sequence
+      AFRAME.registerComponent("animate-png", {
+        init: function() {
+          // load the .pngs
+          let loader = new THREE.TextureLoader()
+          this.pngArray = []
+          this.pngArray.push(loader.load('assets/04/frame_00000.png'))
+          this.pngArray.push(loader.load('assets/04/frame_00002.png'))
+          this.pngArray.push(loader.load('assets/04/frame_00003.png'))
+          this.pngArray.push(loader.load('assets/04/frame_00004.png'))
+          this.pngArray.push(loader.load('assets/04/frame_00005.png'))
+
+          this.el.addEventListener('loaded', e => {
+            let mesh = this.el.getObject3D("mesh")
+            this.material = mesh.material
+
+            var i = 0
+            this.id = setInterval(e => {
+              if (i >= this.pngArray.length) i = 0;
+              this.material.map = this.pngArray[i++]
+              this.material.needsUpdate = true
+            }, 6000)
+          })
+        },
+
+      })
+
+      //const scene = document.querySelector('a-scene');
+      
+      const run = () => {
+
+      //L1 
+        const sphere = document.querySelector("#L1");
+        const mat_1 = sphere.getAttribute("material");
+
+        const anim_1op = sphere.getAttribute("animation__1op");
+        const anim_1sc = sphere.getAttribute("animation__1sc");
+        const anim_1dis = sphere.getAttribute("animation__1dis");
+        const anim_1rot = sphere.getAttribute("animation__1rot");
+      
+/*      //L2
+        const sphere = document.querySelector("#L2");
+        const anim_1op = sphere.getAttribute("animation__2op");
+        const anim_1sc = sphere.getAttribute("animation__2sc");
+        const anim_1dis = sphere.getAttribute("animation__2dis");
+        const anim_1rot = sphere.getAttribute("animation__2rot");
+
+        //L3
+        const sphere = document.querySelector("#L3");
+        const anim_1op = sphere.getAttribute("animation__3op");
+        const anim_1sc = sphere.getAttribute("animation__3sc");
+        const anim_1dis = sphere.getAttribute("animation__3dis");
+        const anim_1rot = sphere.getAttribute("animation__3rot");*/
+
+      // D^ > R^
+        if (confirmed > 0.1 && confirmed < 0.3){
+          //L1
+          anim_1sc.from = "3 3 3";
+          anim_1sc.dur = 6000;
+          anim_1sc.delay = 1000;
+          anim_1sc.from = "1 1 1";
+          anim_1sc.to = "3 3 3";
+          anim_1dis.from = 0.5;
+          anim_1dis.to = 0;
+          anim_1dis.duration = 2000;
+        } 
+
+        sphere.setAttribute("animation__1op", anim_1op);
+        sphere.setAttribute("animation__1sc", anim_1sc);
+        sphere.setAttribute("animation__1dis", anim_1dis);
+        sphere.setAttribute("animation__1rot", anim_1rot);
+        
+        console.log("hello", confirmed);
+      }
+
+      if (scene.hasLoaded) {
+        run()
+      } else {
+        scene.addEventListener('loaded', run)
+      }
+
+    </script>
+
+  </body>
+</html>
