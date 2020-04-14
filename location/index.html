@@ -5,10 +5,11 @@
     <title>sphere 01</title>
     <meta name="description" content="Hello, WebVR! • A-Frame">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/chenzlabs/three.ar.js/0f645a5/dist/three.ar.min.js"></script>
-    <script src="https://rawgit.com/chenzlabs/aframe-ar/0cf8d5a/dist/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
     <script>
       // array of images?
@@ -16,7 +17,7 @@
     <style> * { -webkit-tap-highlight-color: rgba(0,0,0,0); } </style>        
   </head>
   <body style="margin : 0px; overflow: hidden;">
-    <a-scene ar arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" renderer='precision: medium;'>
+    <a-scene ar enbedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" renderer='precision: medium;'>
 
       <a-camera user-height="0" cursor="fuse:false" ar-raycaster raycaster="objects:none"> </a-camera>      
 
@@ -103,18 +104,6 @@
 
       console.log("C " + confirmed,"D " + deaths, "R " +recovered);
 
-      //load Space for object
-      const onSceneLoaded = () => {
-        const raycaster = document.querySelector('[ar-raycaster]');
-        const cursor = document.querySelector('#cursor');
-        raycaster.addEventListener('raycaster-intersection', (event) => {
-          cursor.setAttribute('position', event.detail.intersections[0].point);
-        });
-      }
-
-      const scene = document.querySelector('a-scene');
-      scene.addEventListener('loaded', onSceneLoaded);
-
       //png Sequence
       AFRAME.registerComponent("animate-png", {
         init: function() {
@@ -143,9 +132,18 @@
       })
 
       //const scene = document.querySelector('a-scene');
-      
+      const scene = document.querySelector('a-scene');
       const run = () => {
 
+        //raycaster - position object in AR space
+        const raycaster = document.querySelector('[ar-raycaster]');
+        const cursor = document.querySelector('#cursor');
+
+        //load Space for object
+        
+        raycaster.addEventListener('raycaster-intersection', (event) => {
+          cursor.setAttribute('position', event.detail.intersections[0].point);
+        });
       //L1 
         const sphere = document.querySelector("#L1");
         const mat_1 = sphere.getAttribute("material");
@@ -179,7 +177,7 @@
           anim_1sc.to = "3 3 3";
           anim_1dis.from = 0.5;
           anim_1dis.to = 0;
-          anim_1dis.duration = 2000;
+          anim_1dis.dur = 2000;
         } 
 
         sphere.setAttribute("animation__1op", anim_1op);
@@ -190,11 +188,9 @@
         console.log("hello", confirmed);
       }
 
-      if (scene.hasLoaded) {
-        run()
-      } else {
-        scene.addEventListener('loaded', run)
-      }
+    
+      scene.addEventListener('loaded', run)
+      
 
     </script>
 
