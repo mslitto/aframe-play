@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>version 01 sphere</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet');
+
+      #figure {
+        right: 0;
+        float: left;
+        margin: 10px 10px;
+        background: transparent;
+        font-family: 'Ubuntu', sans-serif;
+        position: fixed;
+        top: 100px;
+        right: 100px;
+        margin: 0 10px 10px 0;
+        z-index: 9999;
+      }
+
+      * { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+    </style>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/three.ar.js/0f645a5/dist/three.ar.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+  </head>
+    <body style="margin : 0px; overflow: hidden;">
+      <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" vr-mode-ui="enabled: false"renderer='precision: medium;'>
+      	<a-assets>
+      	  <img id="l01" src="assets/01_layer.png">
+      	  <img id="l02" src="assets/02_layer.png">
+      	  <img id="l03" src="assets/03_layer.png">
+      	</a-assets>
+
+        <a-sphere
+        id="L1"
+        material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
+        segments-height="128"
+        segments-width="128"
+        position="0 2.25 -5" 
+        radius="0.55" 
+        displacement-map="#l01"
+        displacement-bias="0"
+        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
+        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
+        animation__1dis="property: material.displacementScale; dir: alternate; from: 0; to: 1; dur: 3000; loop: true;"
+        animate-png
+        ></a-sphere>
+
+
+        <a-camera user-height="0" cursor="fuse:false" ar-raycaster raycaster="objects:none"> </a-camera>
+        <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
+        color="teal" position="0 -0.8 -5" rotation="-90 0 0">
+        </a-ring>
+    </a-scene>
+
+    <div id="figure"></div>
+
+  </body>
+</html>
+
+
+
