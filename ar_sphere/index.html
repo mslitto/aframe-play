@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>marker-based</title>
+    <title>Im alive</title>
 
     <style>
       @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet');
@@ -38,53 +38,58 @@
   </head>
     <body style="margin : 0px; overflow: hidden;">
       <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; trackingMethod: best; matrixCodeType: 3x3; labelingMode: white_region" vr-mode-ui="enabled: false"renderer='precision: medium;'>
-        <a-assets>
-          <img id="l01" src="assets/04/frame_00000.png">
-          <img id="l02" src="assets/04/frame_00001.png">
-          <img id="l03" src="assets/04/frame_00002.png">
-        </a-assets>
+  <a-assets>
+    <img id="l01" src="assets/01_layer.png">
+    <img id="l02" src="assets/02_layer.png">
+    <img id="l03" src="assets/03_layer.png">
+  </a-assets>
 
-        <a-marker id='marker_sh' registerevents preset='custom' type='pattern' url='stayhome2.patt'>
-          <a-sphere
-          id="L1"
-          material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
-          segments-height="128"
-          segments-width="128"
-          position="0 2.25 -5" 
-          radius="0.55" 
-          displacement-map="#l01"
-          displacement-bias="0"
-          animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
-          animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
-          animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
-          animation__1dis="property: material.displacementScale; dir: alternate; from: 0; to: 1; dur: 3000; loop: true;"
-          animate-png
-          ></a-sphere>
-          
-          <a-sphere
-          id="L2"
-          material="src: #l03; side: double; transparent: true; alphaTest: 0.5"
-          segments-height="128"
-          segments-width="128"
-          position="0 2.25 -5" 
-          radius="0.5" 
-          animation__2rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
-          animation__1sc="property: scale; easing: easeInOutQuad; from: 0.5 0.5 0.5; to: 2 2 2; dir: alternate; loop: true;"
-          ></a-sphere>
+  <a-marker id='marker_sh' registerevents preset='custom' type='pattern' url='stayhome2.patt'>
+    <a-sphere
+      id="sphere_01"
+      material="src: #l01; side: double; transparent: true"
+      scale='0.1 0.1 0.1'
+      segments-height="128"
+      segments-width="128"
+      position="0 0 0.5"
+      animation__rotation="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+    ></a-sphere>
 
-          <a-sphere
-          id="L3"
-          material="src: #l02; side: double; transparent: true; alphaTest: 0.5"
-          segments-height="128"
-          segments-width="128"
-          position="0 2.25 -5" 
-          radius="0.5" 
-          animation__3rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
-          animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
-          ></a-sphere>
-        </a-marker>
+  <a-sphere
+    id="sphere_02"
+    material="src: #l02; side: double; transparent: true"
+    scale='0.2 0.2 0.2'
+    segments-height="128"
+    segments-width="128"
+    position="0 0 0.5"
+    animation__rotation="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+  ></a-sphere>
 
-        <a-entity camera></a-entity>
+  <a-sphere
+    id="sphere_03"
+    material="src: #l05; side: double; transparent: true"
+    segments-height="128"
+    segments-width="128"
+    scale="0.5 0.5 0.5"
+    position="0 0 0.5"
+    displacement-map="#l02"
+    displacement-bias="0"
+    displacement-scale="60"
+
+    animation__rotation="property: rotation; dur: 10000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
+    animation__scale="
+    property: scale;
+    easing: easeInOutElastic;
+    loop: true;
+    dir: alternate;
+    dur: 5000;
+    from: 0.5 0.5 0.5;
+    to: 1 1 1; start-event: click"
+    animation__dis="property: material.displacementScale; dir: alternate; from: 1; to: 12; dur: 3000; loop: true;"
+  ></a-sphere>
+      </a-marker>
+
+      <a-entity camera></a-entity>
     </a-scene>
 
     <div id="figure"></div>
