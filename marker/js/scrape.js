@@ -84,21 +84,21 @@ const load = async () => {
   } catch(e) {
     document.body.innerHTML = e
   }
-  // const defaultValue = -1
-  // const deathRatio = (totals.confirmed / totals.deaths)
-  // const deathBattle = ((totals.recovered / totals.confirmed) - (totals.deaths/ totals.confirmed))
-  // const sickatHome = (totals.confirmed - totals.deaths - totals.recovered)
+  const defaultValue = -1
+  const deathRatio = (totals.confirmed / totals.deaths)
+  const deathBattle = ((totals.recovered / totals.confirmed) - (totals.deaths/ totals.confirmed))
+  const sickatHome = (totals.confirmed - totals.deaths - totals.recovered)
 
-  // //scale sphere add EventListener
-  // if (deathBattle < defaultValue) {
-      // console.log(1)
-  // } else {
-      // console.log(0)
-  // }
+  //scale sphere add EventListener
+  if (deathBattle < defaultValue) {
+      console.log(1)
+  } else {
+      console.log(0)
+  }
 
-  // const figure = document.getElementById('figure')
+  const figure = document.getElementById('figure')
 
-  // figure.innerHTML = "confirmed " + totals.confirmed + "<br>" + "death " + totals.deaths + "<br>" + "recovered "  + totals.recovered + "<br>" + "sickatHome " + sickatHome +  "<br>" + deathBattle
+  figure.innerHTML = "confirmed " + totals.confirmed + "<br>" + "death " + totals.deaths + "<br>" + "recovered "  + totals.recovered + "<br>" + "sickatHome " + sickatHome +  "<br>" + deathBattle
 }
 
 load()
