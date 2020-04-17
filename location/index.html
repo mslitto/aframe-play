@@ -22,18 +22,67 @@
 
 <body style='margin: 0; overflow: hidden;'>
     <a-scene
-        cursor='rayOrigin: mouse; fuse: true; fuseTimeout: 0;'
-        raycaster="objects: [clickhandler];"
-        vr-mode-ui="enabled: false"
+        cvr-mode-ui="enabled: false"
         embedded
         arjs='sourceType: webcam; debugUIEnabled: false;'>
 
-        <a-box
+        <a-assets>
+        <img id="l00" src="assets/layers/layers00.png">
+        <img id="l01" src="assets/04/frame_00000.png">
+        <img id="l02" src="assets/layers/layers02.png">
+        <img id="l03" src="assets/layers/layers03.png">
+        <img id="l04" src="assets/layers/layers04.png">
+        <img id="l05" src="assets/layers/layers05.png">
+        <img id="l06" src="assets/layers/layers06.png">
+        <img id="l07" src="assets/layers/layers07.png">
+        <img id="l08" src="assets/layers/layers08.png">
+        <img id="l09" src="assets/layers/layers09.png">
+        <img id="l10" src="assets/layers/layers10.png">
+        <img id="l11" src="assets/layers/layers11.png">
+        </a-assets>
+
+        <a-entity
             clickhandler
-            material="color: red;"
             scale="20 20 20"
-            gps-entity-place="latitude: 48.2073136; longitude: 16.3949127;">
-        </a-box>
+            gps-entity-place="latitude: 48.2074885; longitude: 16.3948534;">
+
+            <a-sphere
+            id="L1"
+            material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
+            segments-height="128"
+            segments-width="128"
+            radius="0.55" 
+            displacement-map="#l01"
+            displacement-bias="0"
+            animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
+            animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
+            animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
+            animation__1dis="property: material.displacementScale; dir: alternate; from: 0; to: 1; dur: 3000; loop: true;"
+            animate-png
+            ></a-sphere>
+            
+            <a-sphere
+            id="L2"
+            material="src: #l05; side: double; transparent: true; alphaTest: 0.5"
+            segments-height="128"
+            segments-width="128"
+            position="0 2.25 -5" 
+            radius="0.5" 
+            animation__2rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;" 
+            animation__1sc="property: scale; easing: easeInOutQuad; from: 0.5 0.5 0.5; to: 2 2 2; dir: alternate; loop: true;"
+            ></a-sphere>
+
+            <a-sphere
+            id="L3"
+            material="src: #l07; side: double; transparent: true; alphaTest: 0.5"
+            segments-height="128"
+            segments-width="128"
+            position="0 2.25 -5" 
+            radius="0.5" 
+            animation__3rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+            animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
+            ></a-sphere>
+        </a-entity>
 
         <a-camera gps-camera rotation-reader>
     </a-camera>
