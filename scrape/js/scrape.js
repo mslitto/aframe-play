@@ -61,7 +61,7 @@ const load = async () => {
   try {
     const confirmedUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv`
     const deathUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv`
-     const recoveredUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv`
+    const recoveredUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv`
 
     const confirmed = await getResults(confirmedUrl)
     const deaths = await getResults(deathUrl)
@@ -69,40 +69,21 @@ const load = async () => {
 
     console.log({ confirmed, deaths, recovered })
 
-    // hier wird die aframe funktion aufgerufen
 
-  // aframe && events
-  const s01 = document.querySelector('#sphere_01');
-  //const s02 = document.querySelector('#sphere_02');
-  //const s03 = document.querySelector('#sphere_03');
+    //const eventTest = new Event("eventTest");
+    //eventTest.deaths = deaths;
+    //eventTest.confirmed = confirmed;
+    //s01.dispatchEvent(eventTest);
 
-  const eventTest = new Event("eventTest");
-  eventTest.deaths = deaths;
-  eventTest.confirmed = confirmed;
-  s01.dispatchEvent(eventTest);
-
-  } catch(e) {
-    document.body.innerHTML = e
-  }
-  // const defaultValue = -1
-  // const deathRatio = (totals.confirmed / totals.deaths)
-  const deathBattle = ((totals.recovered / totals.confirmed) - (totals.deaths/ totals.confirmed))
-  const sickatHome = (confirmed - deaths - recovered)
-
-  // //scale sphere add EventListener
-  // if (deathBattle < defaultValue) {
-      // console.log(1)
-  // } else {
-      // console.log(0)
-  // }
-
-   const figure = document.getElementById('figure')
-
-   figure.innerHTML = "confirmed " + confirmed + "<br>" + "death " + deaths + "<br>" + "recovered "  + recovered + "<br>" + "sickatHome " + sickatHome +  "<br>" + deathBattle;
+    const figure = document.getElementById('figure')
+    figure.innerHTML = "confirmed" + confirmed.today + "<br>" + "death " + deaths.today + "<br>" +   "recovered "  + recovered.today + "<br>";
+    } catch(e) {
+      document.body.innerHTML = e
+    }
+    
 }
 
 load()
-
 
 
 
