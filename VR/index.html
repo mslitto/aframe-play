@@ -31,10 +31,8 @@
         </a-assets>
 
         <!-- Red directional light shining from the top left. -->
-        <a-entity light="type:directional; castShadow:true;" position="1 10 1"></a-entity>
 
-        <a-entity light="type: spot; angle: 70"></a-entity>
-        <a-entity light="type: point; intensity: 2.55; distance: 1; decay: 2"position="0 2.25 -5"></a-entity>
+        <a-light type="point" color="white" position="0 6 0" castShadow="true" target="L1"></a-light>
       
         <a-sphere
         id="L1"

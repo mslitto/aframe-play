@@ -96,9 +96,9 @@ const load = async () => {
       // console.log(0)
   // }
 
-  // const figure = document.getElementById('figure')
+   const figure = document.getElementById('figure')
 
-  // figure.innerHTML = "confirmed " + totals.confirmed + "<br>" + "death " + totals.deaths + "<br>" + "recovered "  + totals.recovered + "<br>" + "sickatHome " + sickatHome +  "<br>" + deathBattle
+   figure.innerHTML = "confirmed " + totals.confirmed + "<br>" + "death " + totals.deaths + "<br>" + "recovered "  + totals.recovered + "<br>" + "sickatHome " + sickatHome
 }
 
 load()

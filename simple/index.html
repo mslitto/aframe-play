@@ -18,26 +18,19 @@
     <a-scene background="color: #212122" renderer="sortObjects: true;" shadow="autoUpdate: true">
 
       <a-assets>
-        <img id="l00" src="assets/layers/layers00.png">
-        <img id="l01" src="assets/layers/layers01.png">
-        <img id="l02" src="assets/layers/layers02.png">
-        <img id="l03" src="assets/layers/layers03.png">
-        <img id="l04" src="assets/layers/layers04.png">
-        <img id="l05" src="assets/layers/layers05.png">
-        <img id="l06" src="assets/layers/layers06.png">
-        <img id="l07" src="assets/layers/layers07.png">
-        <img id="l08" src="assets/layers/layers08.png">
-        <img id="l09" src="assets/layers/layers09.png">
-        <img id="l10" src="assets/layers/layers10.png">
-        <img id="l11" src="assets/layers/layers11.png">
+        <img id="l00" src="assets/layers/05__0002_03.png">
+        <img id="l01" src="assets/layers/05__0001_02.png">
+        <img id="l02" src="assets/layers/05__0000_01.png">
+        <img id="l11" src="assets/layers/Layers00.png">
         
-        <a-asset-item id="01_quill" response-type="arraybuffer" src="assets/blub2.gltf"></a-asset-item>
         </a-assets>
 
         <!-- Red directional light shining from the top left. -->
-        <a-entity light="type:directional; castShadow:true;" position="1 1 1"></a-entity>
+        <a-entity light="type:directional; castShadow:true;" position="1 2 1; angle: 180; light.intensity: 1;" ></a-entity>
 
-        <a-entity light="type: spot; angle: 45"></a-entity>
+        <a-light type="point" color="white" position="0 6 0" castShadow="true"></a-light>
+
+        <a-light type="ambient" color="#222"></a-light>
 
         <a-entity light="type: point; intensity: 0.55; distance: 10; decay: 9"position="0 2.25 -5"></a-entity>
       
@@ -50,16 +43,16 @@
         radius="0.55" 
         displacement-map="#l00"
         displacement-bias="0"
-        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 0; dir: alternate; loop: true;"
+        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
         animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
-        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
-        animation__1dis="property: material.displacementScale; dir: alternate; from: 0.2; to: -0.1; dur: 3000; loop: true;"
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 1 1 1; dir: alternate; loop: true;"
+        animation__1dis="property: material.displacementScale; dir: alternate; from: 1; to: 0.2; dur: 3000; loop: true;"
         animatedPng
         ></a-sphere>
         
         <a-sphere
         id="L2"
-        material="src: #l05; side: double; transparent: true; alphaTest: 0.5"
+        material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
@@ -70,23 +63,15 @@
 
         <a-sphere
         id="L3"
-        material="src: #l07; side: double; transparent: true; alphaTest: 0.5"
+        material="src: #l02; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
         radius="0.5" 
         animation__3rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
-        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
+        animation__1sc="property: scale; easing: easeInOutElastic; from: 3.5 3.5 3.5; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
         ></a-sphere>
           
-
-
-
-
-
-  
-
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#2c2c2c" shadow></a-plane>
     </a-scene>
 
     <div id="figure"></div>
@@ -146,7 +131,7 @@
           anim_1sc.from = "3 3 3";
           anim_1sc.dur = 6000; 
           anim_1op.dur = 3000;
-          anim_1op.from = 0;
+          anim_1op.from = 1;
           anim_1op.to = 1;
           anim_1dis.to = 1;
         } 
