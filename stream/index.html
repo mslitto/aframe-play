@@ -46,7 +46,7 @@
         duration="16000"
         opacity="0.8"
         ></video>
-
+        <video id="webcam" playsinline crossorigin="anonymous"></video>
         </a-assets>
 
         <!-- Red directional light shining from the top left. -->
@@ -58,7 +58,7 @@
       
         <a-sphere
         id="L1"
-        material="src: #video_1; side: double; transparent: true; alphaTest: 0.53; opacity: 0.8;"
+        material="src: #webcam; side: double; transparent: true; alphaTest: 0.53; opacity: 0.8;"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
@@ -79,34 +79,17 @@
 
     <script> 
 
-    videoTexture.format = THREE.RGBAFormat
-    // wait until the material is ready
-    this.el.addEventListener('materialtextureloaded', e => {
-       // grab the material
-       let material = this.el.getObject3D("mesh").material;
-       // swap the format
-       material.map.format = THREE.RGBAFormat;
-       material.map.needsUpdate = true;
-    })
-    //Playbutton for video
-      function play(id){
-        var aVideoAsset = document.querySelector('#' + id);
-        aVideoAsset.play().catch(function (error) {
-          aVideoAsset.pause();
-          hideOrShow("playButton");
 
-        });
-        aVideoAsset.setAttribute('loop', 'false');
-        hideOrShow('playButton');
+    // You can also set which camera to use (front/back/etc)
+    // @SEE https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+    navigator.mediaDevices.getUserMedia({audio: false, video: true})
+    .then(stream => {
+      let $video = document.querySelector('webcam')
+      $video.srcObject = stream
+      $video.onloadedmetadata = () => {
+        $video.play()
       }
-      function hideOrShow(id) {
-        var x = document.getElementById(id);
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
+    })
 
 
     // corona statistic
