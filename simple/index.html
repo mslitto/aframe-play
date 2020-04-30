@@ -7,10 +7,6 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-render-order-component@1.1.0/dist/aframe-render-order-component.min.js"></script>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" animate-png></a-box>
-    </a-scene>
-
 
     </script>
   </head>
@@ -63,7 +59,7 @@
 
         <a-sphere
         id="L3"
-        material="src: #l02; side: double; transparent: true; alphaTest: 0.5"
+        material="src: #l11; side: double; transparent: true; alphaTest: 0.5"
         segments-height="128"
         segments-width="128"
         position="0 2.25 -5" 
@@ -71,7 +67,15 @@
         animation__3rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
         animation__1sc="property: scale; easing: easeInOutElastic; from: 3.5 3.5 3.5; to: 0.5 0.5 0.5; dir: alternate; loop: true;" 
         ></a-sphere>
-          
+         
+        <a-sky src="#l02" 
+        radius="10" 
+        rotation="180 -50 180"
+        displacement-map="#l00"
+        displacement-bias="0"
+        displacement-scale="12"
+        ></a-sky>
+
     </a-scene>
 
     <div id="figure"></div>
