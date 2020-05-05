@@ -159,7 +159,7 @@ const run = async () => {
 
   // confirmed Z1 Z2 Z3
   if (confRate > 0.01) {
-    if (confRate <= 3) {
+    if (confRate <= 1.05) {
       // L1
       s11.setAttribute('visible', true);
       s12.setAttribute('visible', false);
@@ -174,13 +174,13 @@ const run = async () => {
       s32.setAttribute('visible', false);
       s33.setAttribute('visible', false);
 
-    } else if (confRate <= 5) {
+    } else if (confRate <= 1.5) {
       // Z2
       // L1
       s11.setAttribute('visible', false);
       s12.setAttribute('visible', true);
       s13.setAttribute('visible', false);
-      console.log("L1 < 3%")
+      console.log("L1 >>>>> 1.5 <<< 5")
       // L2
       s21.setAttribute('visible', false);
       s22.setAttribute('visible', true);
@@ -206,7 +206,7 @@ const run = async () => {
       s31.setAttribute('visible', false);
       s32.setAttribute('visible', false);
       s33.setAttribute('visible', true);
-      figure2.innerHTML = 'very FUCK'
+      figure1.innerHTML = 'very FUCK'
 
     }
   }
@@ -219,20 +219,20 @@ const run = async () => {
   if (deathRate > 2) {
     if (deathRate <= 5) {
       // Z1
-      figure2.innerHTML = 'high//deaths'
+      console.log('high//deaths')
     } else if (deathRate <= 10) {
       // Z2
-      figure2.innerHTML = 'unstopable'
+      console.log('unstopable')
     } else {
       // Z3
-      figure2.innerHTML = 'good bye'
+      console.log('good bye')
     }
   }
 
   if (deathRate > recRate) {
-    figure2.innerHTML = 'Dˆ > Rˆ'
+    console.log('Dˆ > Rˆ)
   } else {
-    figure2.innerHTML = 'Dˆ < Rˆ'
+    console.log('Dˆ < Rˆ')
   }
 /*
   sphere_1.setAttribute('animation__1op', anim_1op)

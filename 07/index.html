@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/aframe-render-order-component@1.1.0/dist/aframe-render-order-component.min.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-mirror-component/dist/aframe-mirror-component.min.js"></script>
-    <script src="dist/iphone-inline-video.min.js"></script>
+    <script src="https://unpkg.com/fregante/iphone-inline-video/dist/iphone-inline-video.min.js"></script>
 
 
     <style>
@@ -99,16 +99,13 @@
     <div id="figure1">
       <p>Litto is alive</p>
     </div>
-    <div id="figure2">
-      <p>Litto is alive</p>
-    </div>
 
     <a id="playButton" onclick="play('video_1')"></a>
 
     <a-scene color-space="sRGB" background="color: #212122" renderer="sortObjects: true" shadow="autoUpdate: true; type: pcfsoft">
 
       <a-assets>
-        <video id="video_1" src="assets/videos/02.webm" autoplay playsinline muted
+        <video id="video_1" src="assets/videos/02.webm" playsinline muted
         crossOrigin="anonymous"
         autoplay="false"
         loop="true"
@@ -121,11 +118,12 @@
         <img id="l04" src="assets/layers/07__0003_04.png">
 
         <img id="albedo" src=assets/textures/t_albedo.png>
-        <img id="ao" src=assets/textures/t_alo.png>
+        <img id="ao" src=assets/textures/t_ao.png>
         <img id="normal" src=assets/textures/t_normal.png>
         <img id="rough" src=assets/textures/t_roughness.png>
 
         <img id="l11" src="assets/sky_2.JPG">
+        <img id="l12" src="assets/sky_1.JPG">
         </a-assets>
 
         <!-- Red directional light shining from the top left.
@@ -155,11 +153,11 @@
         material="src: #l01; side: double; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0;"metalness: 0.3;"
         position="0 0 0"
         radius="2"
-        displacement-map="None"
+        displacement-map=""
         displacement-bias="0.5"
         displacementScale="1"
         animation__1op="property: opacity; dur: 11000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
-        animation__1rot="property: rotation; dur: 11000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;"
+        animation__1rot="property: rotation; dur: 11000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
         animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
         animation__1dis="property: material.displacementScale; dir: alternate; loop: true;"
         ></a-sphere>
@@ -239,7 +237,7 @@
         material="src: #l03; side: double; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0;"metalness: 0.3;"
         position="0 0 0"
         radius="3"
-        displacement-map="l03"
+        displacement-map="#l03"
         displacement-bias="0.5"
         displacementScale="1"
         animation__1op="property: opacity; dur: 11000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
@@ -253,7 +251,7 @@
         material="src: #l03; side: double; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0;"metalness: 0.3;"
         position="0 0 0"
         radius="3"
-        displacement-map="l03"
+        displacement-map="#l03"
         displacement-bias="0.5"
         displacementScale="1"
         animation__1op="property: opacity; dur: 11000; easing: linear; easing: easeInOutElastic; from:0; to: 1; dir: alternate; loop: true;"
@@ -267,7 +265,7 @@
         material="src: #l03; side: double; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0;"metalness: 0.3;"
         position="0 0 0"
         radius="3"
-        displacement-map="None"
+        displacement-map=""
         displacement-bias="0.5"
         displacementScale="1"
         animation__1op="property: opacity; dur: 11000; easing: linear; easing: easeInOutElastic; from:0; to: 1; dir: alternate; loop: true;"
@@ -280,6 +278,7 @@
 
         <a-entity camera look-controls orbit-controls="target: 0 2.25 -5; minDistance: 0.5; maxDistance: 30; initialPosition: -19 5 15"></a-entity>
         <a-sky src="#video_1" radius="30" rotation="180 -50 180"></a-sky>
+        <a-sky src="#l12" radius="31" rotation="180 -50 180"></a-sky>
 
     </a-scene>
     <!-- webscrape corona -->

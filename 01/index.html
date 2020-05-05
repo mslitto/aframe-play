@@ -77,6 +77,8 @@
         crossOrigin="anonymous"
         autoplay="false"
         loop="true"
+        duration="2000"
+        opacity="1"
         ></video>
 
         <img id="l01" src="assets/layers/01__0000_01.png">
@@ -115,22 +117,7 @@
         ></a-sphere>
 
         <a-sphere
-        id="L1Z2"
-        material="src: #l01; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0; metalness: 0.3;"
-        shadow="receive: true"
-        position="0 2.25 -5"
-        radius="1"
-        displacement-map="#l01"
-        displacement-bias="0"
-        animation__1op="property: opacity; dur: 8000; easing: linear; easing: easeInOutElastic; from:1; to: 1; dir: alternate; loop: true;"
-        animation__1rot="property: rotation; dur: 8000; easing: linear; dir: normal; from:0 0 0; to: 0 -360 0; loop: true;"
-        animation__1sc="property: scale; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
-        animation__1dis="property: material.displacementScale; dir: alternate; loop: true;"
-        animate-png
-        ></a-sphere>
-
-        <a-sphere
-        id="L1Z2"
+        id="L1Z1"
         material="src: #l01; transparent: true; alphaTest: 0.5; sphericalEnvMap: #video_1; roughness: 0; metalness: 0.3;"
         shadow="receive: true"
         position="0 2.25 -5"
