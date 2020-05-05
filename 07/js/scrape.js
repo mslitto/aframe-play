@@ -92,13 +92,13 @@ const load = async () => {
       'recovered ' +
       recovered.today +
       '<br>' +
-      'C ' +
+      'Cˆ ' +
       confRate +
       '<br>' +
-      'R ' +
+      'Rˆ ' +
       recRate +
       '<br>' +
-      'D ' +
+      'Dˆ ' +
       deathRate
 
     return {
@@ -159,7 +159,7 @@ const run = async () => {
 
   // confirmed Z1 Z2 Z3
   if (confRate > 0.01) {
-    if (confRate <= 1.05) {
+    if (confRate <= 1) {
       // L1
       s11.setAttribute('visible', true);
       s12.setAttribute('visible', false);
@@ -174,7 +174,7 @@ const run = async () => {
       s32.setAttribute('visible', false);
       s33.setAttribute('visible', false);
 
-    } else if (confRate <= 1.5) {
+    } else if (confRate <= 3) {
       // Z2
       // L1
       s11.setAttribute('visible', false);
@@ -190,14 +190,14 @@ const run = async () => {
       s32.setAttribute('visible', true);
       s33.setAttribute('visible', false);
 
-      figure2.innerHTML = 'FUCK'
+      console.log('FUCK')
     } else {
       // Z3
             // L1
       s11.setAttribute('visible', false);
       s12.setAttribute('visible', false);
       s13.setAttribute('visible', true);
-      console.log("L1 < 3%")
+      console.log("L1 > 3%")
       // L2
       s21.setAttribute('visible', false);
       s22.setAttribute('visible', false);
@@ -206,7 +206,6 @@ const run = async () => {
       s31.setAttribute('visible', false);
       s32.setAttribute('visible', false);
       s33.setAttribute('visible', true);
-      figure1.innerHTML = 'very FUCK'
 
     }
   }
@@ -216,11 +215,11 @@ const run = async () => {
   }
 
   // deaths Z! Z2 Z3
-  if (deathRate > 2) {
-    if (deathRate <= 5) {
+  if (deathRate > 0.01) {
+    if (deathRate <= 3) {
       // Z1
-      console.log('high//deaths')
-    } else if (deathRate <= 10) {
+      console.log('low deaths')
+    } else if (deathRate <= 7) {
       // Z2
       console.log('unstopable')
     } else {
@@ -230,7 +229,7 @@ const run = async () => {
   }
 
   if (deathRate > recRate) {
-    console.log('Dˆ > Rˆ)
+    console.log('Dˆ > Rˆ')
   } else {
     console.log('Dˆ < Rˆ')
   }
