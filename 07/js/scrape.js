@@ -77,9 +77,9 @@ const load = async () => {
 
     console.log({ confirmed, deaths, recovered })
     const newCases = ((confirmed.today - confirmed.yesterday) / confirmed.yesterday) * 100
-    const deathRate = ((deaths.today - deaths.yesterday) / deaths.yesterday) * 100
+    const deathRate = ((deaths.today - deaths.yesterday) / deaths.yesterday) * 100 
     const recRate = ((recovered.today - recovered.yesterday) / recovered.yesterday) * 100
-    const confRate = ((confirmed.today - confirmed.yesterday) / confirmed.yesterday) * 100
+    const confRate = ((confirmed.today - confirmed.yesterday) / confirmed.yesterday) * 100 
 
     const figure = document.getElementById('figure1')
     figure.innerHTML =
@@ -114,27 +114,6 @@ const load = async () => {
   return {}
 }
 
-//Playbutton for video
-const play = id => {
-  const aVideoAsset = document.querySelector('#' + id)
-
-  aVideoAsset.play().catch(error => {
-    aVideoAsset.pause()
-    hideOrShow('playButton')
-  })
-
-  aVideoAsset.setAttribute('loop', 'true')
-  hideOrShow('playButton')
-}
-
-const hideOrShow = id => {
-  const x = document.getElementById(id)
-  if (x.style.display === 'none') {
-    x.style.display = 'block'
-  } else {
-    x.style.display = 'none'
-  }
-}
 
 const scene = document.querySelector('a-scene')
 
@@ -143,14 +122,25 @@ const run = async () => {
   const { confRate, deathRate, recRate } = await load()
 
   //L1
-  const sphere_1 = document.querySelector('#L1')
+  const s11 = document.querySelector('#L1Z1')
+  const s21 = document.querySelector('#L2Z1')
+  const s31 = document.querySelector('#L3Z1')
+  //L2
+  const s12 = document.querySelector('#L1Z2')
+  const s22 = document.querySelector('#L2Z2')
+  const s32 = document.querySelector('#L3Z2')
+  //L3
+  const s13 = document.querySelector('#L1Z3')
+  const s23 = document.querySelector('#L2Z3')
+  const s33 = document.querySelector('#L3Z3')
+  
+  /*
   const anim_1op = sphere_1.getAttribute('animation__1op')
   const anim_1sc = sphere_1.getAttribute('animation__1sc')
   const anim_1dis = sphere_1.getAttribute('animation__1dis')
   const anim_1rot = sphere_1.getAttribute('animation__1rot')
 
-  //L2
-  const sphere_2 = document.querySelector('#L2')
+
   const anim_2op = sphere_2.getAttribute('animation__2op')
   const anim_2sc = sphere_2.getAttribute('animation__2sc')
   const anim_2dis = sphere_2.getAttribute('animation__2dis')
@@ -162,6 +152,7 @@ const run = async () => {
   const anim_3sc = sphere_3.getAttribute('animation__3sc')
   const anim_3dis = sphere_3.getAttribute('animation__3dis')
   const anim_3rot = sphere_3.getAttribute('animation__3rot')
+  */
 
   const figure1 = document.getElementById('figure1')
   const figure2 = document.getElementById('figure2')
@@ -169,14 +160,54 @@ const run = async () => {
   // confirmed Z1 Z2 Z3
   if (confRate > 0.01) {
     if (confRate <= 3) {
-      // Z1
-      figure2.innerHTML = 'is ok'
+      // L1
+      s11.setAttribute('visible', true);
+      s12.setAttribute('visible', false);
+      s13.setAttribute('visible', false);
+      console.log("L1 < 3%")
+      // L2
+      s21.setAttribute('visible', true);
+      s22.setAttribute('visible', false);
+      s23.setAttribute('visible', false);
+      // L3
+      s31.setAttribute('visible', true);
+      s32.setAttribute('visible', false);
+      s33.setAttribute('visible', false);
+
     } else if (confRate <= 5) {
       // Z2
+      // L1
+      s11.setAttribute('visible', false);
+      s12.setAttribute('visible', true);
+      s13.setAttribute('visible', false);
+      console.log("L1 < 3%")
+      // L2
+      s21.setAttribute('visible', false);
+      s22.setAttribute('visible', true);
+      s23.setAttribute('visible', false);
+      // L3
+      s31.setAttribute('visible', false);
+      s32.setAttribute('visible', true);
+      s33.setAttribute('visible', false);
+
       figure2.innerHTML = 'FUCK'
     } else {
       // Z3
+            // L1
+      s11.setAttribute('visible', false);
+      s12.setAttribute('visible', false);
+      s13.setAttribute('visible', true);
+      console.log("L1 < 3%")
+      // L2
+      s21.setAttribute('visible', false);
+      s22.setAttribute('visible', false);
+      s23.setAttribute('visible', true);
+      // L3
+      s31.setAttribute('visible', false);
+      s32.setAttribute('visible', false);
+      s33.setAttribute('visible', true);
       figure2.innerHTML = 'very FUCK'
+
     }
   }
   // C = 0
@@ -203,7 +234,7 @@ const run = async () => {
   } else {
     figure2.innerHTML = 'Dˆ < Rˆ'
   }
-
+/*
   sphere_1.setAttribute('animation__1op', anim_1op)
   sphere_1.setAttribute('animation__1sc', anim_1sc)
   sphere_1.setAttribute('animation__1dis', anim_1dis)
@@ -218,6 +249,7 @@ const run = async () => {
   sphere_3.setAttribute('animation__3sc', anim_3sc)
   sphere_3.setAttribute('animation__3dis', anim_3dis)
   sphere_3.setAttribute('animation__3rot', anim_3rot)
+  */
 }
 
 if (scene.hasLoaded) {
