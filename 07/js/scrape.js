@@ -90,16 +90,8 @@ const load = async () => {
       deaths.today +
       '<br>' +
       'recovered ' +
-      recovered.today +
-      '<br>' +
-      'Cˆ ' +
-      confRate +
-      '<br>' +
-      'Rˆ ' +
-      recRate +
-      '<br>' +
-      'Dˆ ' +
-      deathRate
+      recovered.today 
+    console.log( 'C ' + confRate , 'D ' + deathRate , 'R ' + recRate)
 
     return {
       newCases,
@@ -120,7 +112,7 @@ const scene = document.querySelector('a-scene')
 //async function
 const run = async () => {
   const { confRate, deathRate, recRate } = await load()
-
+  const s00 = document.querySelector('#L0')
   //L1
   const s11 = document.querySelector('#L1Z1')
   const s21 = document.querySelector('#L2Z1')
@@ -193,7 +185,7 @@ const run = async () => {
       console.log('FUCK')
     } else {
       // Z3
-            // L1
+      // L1
       s11.setAttribute('visible', false);
       s12.setAttribute('visible', false);
       s13.setAttribute('visible', true);
