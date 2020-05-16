@@ -15,7 +15,14 @@
     <script src="https://unpkg.com/aframe-mirror-component/dist/aframe-mirror-component.min.js"></script>
     <script src="https://unpkg.com/iphone-inline-video@2.2.2/dist/iphone-inline-video.min.js"></script>
 
+    <!-- Bootstrap Bootswatch theme CSS - other themes available here: https://bootswatch.com -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/thomaspark/bootswatch/gh-pages/slate/bootstrap.min.css" />
+  
+    <!-- Bootstrap JS Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <script src="https://cdn.rawgit.com/gladeye/aframe-preloader-component/1.0.2/dist/aframe-preloader-component.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap");
 
@@ -25,6 +32,7 @@
         position: absolute;
         top: 50vh;
         left: 25vw;
+        top: 25vw;
         width: 50vw;
         background: transparent;
         font-size: 18px;
@@ -78,6 +86,8 @@
   </head>
   <body>
     <script>
+        
+
         //Playbutton for video
     const play = id => {
       const aVideoAsset = document.querySelector('#' + id)
@@ -108,13 +118,12 @@
     <a id="playButton" onclick="play('video_1')">
         <p>LIVING SCULPTURE</p>
         <p>public intervention about spaces and perception during the lock down,<br> VIENNA 2020]</p></a>
+    
+    <a-scene preloader color-space="sRGB" background="color: #212122" renderer="sortObjects: true" shadow="autoUpdate: true; type: pcfsoft">
 
-    <a-scene color-space="sRGB" background="color: #212122" renderer="sortObjects: true" shadow="autoUpdate: true; type: pcfsoft">
-
-      <a-assets>
-        <video id="video_1" src="assets/videos/02.webm" playsinline muted
+      <a-assets preload="true" timeout="0">
+        <video id="video_1" src="assets/videos/02.webm" playsinline webkit-playsinline muted 
         crossOrigin="anonymous"
-        autoplay="false"
         loop="true"
         opacity="1"
         ></video>
@@ -287,7 +296,7 @@
         animation__1sc="property: scale; dur: 6000; easing: easeInOutElastic; from: 2 2 2; to: 3 3 3; dir: alternate; loop: true;"
         animation__1dis="property: material.displacementScale; dur: 11000; from: 0; to: 2.4; dir: alternate; loop: true;"></a-sphere>
 
-        <a-entity camera look-controls orbit-controls="target: 0 1.6 -0.5; minDistance: 0.5; maxDistance: 20; initialPosition: 0 5 15"></a-entity>
+        <a-entity camera look-controls orbit-controls="target: 0 3 0; minDistance: 0.5; maxDistance: 30; initialPosition: 5 5 0"></a-entity>
         <!-- <a-sky src="#video_1" radius="20" rotation="180 -50 180"></a-sky> -->
 
 

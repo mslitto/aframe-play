@@ -91,6 +91,7 @@ const load = async () => {
       '<br>' +
       'recovered ' +
       recovered.today 
+    
     console.log( 'C ' + confRate , 'D ' + deathRate , 'R ' + recRate)
 
     return {
