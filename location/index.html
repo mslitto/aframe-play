@@ -13,14 +13,6 @@
 
 </head>
 
-<script>
-    AFRAME.registerComponent('clickhandler', {
-        init: function() {
-            this.el.addEventListener('click', () => {
-                alert('Clicked!')
-            });
-    }});
-</script>
 
 <body style='margin: 0; overflow: hidden;'>
     <a-scene
@@ -48,13 +40,12 @@
 
 
             <a-sphere
-            clickhandler
-            gps-entity-place="latitude: 48.2365331; longitude: 16.3313357;"
+            gps-entity-place="latitude: 48.2410027; longitude: 16.3986466;"
             id="L1"
             material="src: #l01; side: double; transparent: true; alphaTest: 0.5"
             segments-height="128"
             segments-width="128"
-            radius="2.55" 
+            radius="12" 
             position="0 10 0"
             displacement-map="#l01"
             displacement-bias="0"
