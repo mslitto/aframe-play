@@ -125,9 +125,25 @@
         //   scene.add(ground);
         // }
 
-        loader = new THREE.GLTFLoader;
+        //load GLTF file
+        var loader = new THREE.GLTFLoader();
+        loader.load( 'models/dagmar_size.gltf', 
+        function ( gltf ) {
+            // gltf.scene.traverse( function ( child ) {
+            //     if ( child.isMesh ) {
+            //         child.geometry.center(); // center here
+            //     }
+            // });
+            gltf.scene.scale.set(30,30,30) // scale here
+            gltf.scene.position.set(150,-200,60)
+            gltf.scene.rotation.set(0,0,0)
+            scene.add( gltf.scene );
+        }, (xhr) => xhr, ( err ) => console.error( e ));
 
-
+        // var loader = new THREE.GLTFLoader()
+        // loader.load( 'models/dagmar_size.gltf',  gltf => {
+        //   scene.add(gltf.scene)
+        // })
 
         window.addEventListener( 'resize', onWindowResize, false );
 
